@@ -1,0 +1,43 @@
+package com.bhavadeep.letterlookbackjava;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+class FileParser{
+    private BufferedReader bfReader;
+    private List<Character> characterList;
+
+    /**
+     * Constructor
+     * @param inputFileName - Name of the file specified by the user
+     */
+    FileParser(String inputFileName) {
+        characterList = new ArrayList<>();
+        try {
+            FileReader fr = new FileReader(inputFileName);
+            bfReader = new BufferedReader(fr);
+        } catch (IOException e) {
+            System.out.println("Exception as input file not found at ~/progTest/");
+            System.exit(1);
+        }
+    }
+
+    /**
+     * Parses the input text from the file and returns a list of characters
+     * @return - List of characters in the input string
+     */
+    List<Character> getCharacterList() {
+        int intChar;
+        try {
+            while((intChar = bfReader.read())!= -1 ){
+                characterList.add((char)intChar);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return characterList;
+    }
+}
